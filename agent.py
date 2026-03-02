@@ -23,7 +23,8 @@ load_dotenv()
 def get_env(key: str):
     if key in st.secrets:
         return st.secrets[key]
-    return os.getenv(key)
+    # return os.getenv(key)
+    return None
 
 GOOGLE_API_KEY = get_env("GOOGLE_API_KEY")
 
