@@ -28,71 +28,9 @@ def get_env(key: str):
 
 GOOGLE_API_KEY = get_env("GOOGLE_API_KEY")
 
-# Primary
-primary_llm = ChatGoogleGenerativeAI(
-    model="gemini-2.5-flash",
-    google_api_key=GOOGLE_API_KEY,
-    temperature=0
-)
-
-secondary_llm = ChatGoogleGenerativeAI(
-    model="gemini-2.0-flash-lite",
-    google_api_key=GOOGLE_API_KEY,
-    temperature=0
-)
-
-# Fallback (Local Ollama)
-fallback_llm = ChatOllama(
-    model="qwen2.5:7b",
-    temperature=0
-)
-
-class FallbackLLM(Runnable):
-    def __init__(self, primary, fallback):
-        self.primary = primary
-        self.fallback = fallback
-
-    def invoke(self, input, config=None):
-        try:
-            return self.primary.invoke(input, config=config)
-
-        except Exception as e:
-            error_msg = str(e).lower()
-
-            if any(keyword in error_msg for keyword in [
-                "quota",
-                "rate limit",
-                "429",
-                "token",
-                "resource exhausted"
-            ]):
-                print("⚠️ Google limit hit. Switching to Qwen fallback.")
-                return self.fallback.invoke(input, config=config)
-
-            raise e
-
-    def stream(self, input, config=None):
-        try:
-            yield from self.primary.stream(input, config=config)
-
-        except Exception as e:
-            error_msg = str(e).lower()
-
-            if any(keyword in error_msg for keyword in [
-                "quota",
-                "rate limit",
-                "429",
-                "token",
-                "resource exhausted"
-            ]):
-                print("⚠️ Google limit hit. Switching to Qwen fallback.")
-                yield from self.fallback.stream(input, config=config)
-
-            else:
-                raise e
 # ================= MODEL =================
 try:
-    llm = FallbackLLM(primary_llm, secondary_llm)
+    llm = ChatGoogleGenerativeAI(model="gemini-2.5-flash", google_api_key=GOOGLE_API_KEY, temperature=0)
     # gemini-2.5-flash-lite, gemini-2.5-flash, gemini-2.5-pro , gemini-3-flash, gemini-2.0-flash
     # llm = ChatOllama(model="qwen2.5:7b", temperature=0)
     # qwen2.5:3b, qwen2.5:7b, llama3.2:3b
