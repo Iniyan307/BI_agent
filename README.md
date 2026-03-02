@@ -24,16 +24,6 @@ Hosted on Streamlit Cloud (Free Tier)
 - Fallback Model: Qwen (Ollama)
 - Deployment: Streamlit Cloud
 
-## 📂 Project Structure
-BI_agent/
-│
-├── app.py              # Streamlit UI
-├── agent.py            # LangGraph workflow
-├── tools.py            # BI tools (if applicable)
-├── requirements.txt
-├── .gitignore
-└── README.md
-
 
 ## 🔮 Future Improvements
  - Automatic LLM switching
