@@ -9,15 +9,9 @@ st.caption(
 st.set_page_config(page_title="BI Agent", layout="wide")
 st.title("📊 BI Conversational Agent")
 
-# -----------------------------
-# 🔹 Session State Initialization
-# -----------------------------
 if "messages" not in st.session_state:
     st.session_state.messages = []
 
-# -----------------------------
-# 🔹 Helper: Normalize AI Output
-# -----------------------------
 def normalize_ai_content(content):
     """
     Ensures AI output is always clean string.
@@ -32,10 +26,6 @@ def normalize_ai_content(content):
 
     return str(content)
 
-
-# -----------------------------
-# 🔹 Display Chat History
-# -----------------------------
 for msg in st.session_state.messages:
 
     if msg.type == "human":
@@ -55,46 +45,43 @@ for msg in st.session_state.messages:
             clean_content = normalize_ai_content(msg.content)
             st.markdown(clean_content)
 
-
-# -----------------------------
-# 🔹 Chat Input
-# -----------------------------
 user_input = st.chat_input("Ask about business performance...")
 
 if user_input:
 
-    # 1️⃣ Add user message immediately
     user_msg = HumanMessage(content=user_input)
     st.session_state.messages.append(user_msg)
 
-    # 2️⃣ Show user instantly
     with st.chat_message("user"):
         st.markdown(user_input)
 
-    # 3️⃣ Loader
     loader = st.empty()
     loader.markdown("⏳ **Analyzing data...**")
 
-    # 4️⃣ Run Graph Streaming (NO rendering inside loop)
-    stream = graph.stream(
-        {
-            "messages": st.session_state.messages,
-            "dataset": None,  # You can inject dataset here
-        },
-        stream_mode="values"
-    )
+    try: 
+        stream = graph.stream(
+            {
+                "messages": st.session_state.messages,
+                "dataset": None, 
+            },
+            stream_mode="values"
+        )
+    
+        final_messages = None
+    
+        for event in stream:
+            final_messages = event["messages"]
+        loader.empty()
 
-    final_messages = None
+        if final_messages:
+            st.session_state.messages = final_messages
+        st.rerun()
 
-    for event in stream:
-        final_messages = event["messages"]
-
-    # 5️⃣ Remove loader
-    loader.empty()
-
-    # 6️⃣ Update session state
-    if final_messages:
-        st.session_state.messages = final_messages
-
-    # 7️⃣ Rerun app to render in perfect chronological order
-    st.rerun()
+    except Exception as e:
+        loader.empty()
+        error_text = str(e).lower()
+        # Detect Gemini quota / API error
+        if "quota" in error_text or "rate" in error_text or "api" in error_text:
+            st.error("🚨 Google Gemini API key quota exhausted. Please try again later or switch to local LLM.")
+        else:
+            st.error("⚠️ Something went wrong. Please try again.")
