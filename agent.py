@@ -303,7 +303,7 @@ def intent_node(state: BIState):
 
     system_prompt = f"""
     You are a Business Intelligence Agent. 
-    User will give you a query. Answer only business related queries. 
+    User will give you a query. Answer only business related queries. You can perform calculation and analysis based on the data for the given query.
     Based on the user query, you can choose to ask clarifying questions when necessary or choose to call the monday_tool if the details are enough. 
         Extract:
             columns → List of exact column names requested by the user
