@@ -1,12 +1,12 @@
-📊 BI Conversational Agent
-    An AI-powered Business Intelligence (BI) conversational agent built using LangGraph and Streamlit.
-    This application allows users to interact with business data using natural language queries.
+## 📊 BI Conversational Agent
+### An AI-powered Business Intelligence (BI) conversational agent built using LangGraph and Streamlit.
+### This application allows users to interact with business data using natural language queries.
 
-🚀 Live Demo
-    Hosted on Streamlit Cloud (Free Tier)   
+## 🚀 Live Demo
+Hosted on Streamlit Cloud (Free Tier)   
 
 
-🧠 Features
+## 🧠 Features
 - Conversational BI assistant
 - Tool-based reasoning using LangGraph
 - Real-time streaming responses
@@ -16,7 +16,7 @@
 - Clean chat interface
 
 
-🛠️ Tech Stack
+## 🛠️ Tech Stack
 - Frontend: Streamlit
 - Agent Framework: LangGraph
 - LLM Orchestration: LangChain
@@ -24,7 +24,7 @@
 - Fallback Model: Qwen (Ollama)
 - Deployment: Streamlit Cloud
 
-📂 Project Structure
+## 📂 Project Structure
 BI_agent/
 │
 ├── app.py              # Streamlit UI
@@ -35,13 +35,13 @@ BI_agent/
 └── README.md
 
 
-🔮 Future Improvements
+## 🔮 Future Improvements
  - Automatic LLM switching
  - Database persistence (PostgreSQL)
  - User authentication
  - Token usage monitoring
 
-👨‍💻 Author
+## 👨‍💻 Author
  - Iniyan S
  - AI / ML Engineer
  - Focused on Agentic AI, LLM systems, and Cloud ML solutions
