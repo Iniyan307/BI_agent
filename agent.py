@@ -21,6 +21,7 @@ load_dotenv()
 # =========== GET API key from Streamlit secrets 
 
 def get_env(key: str):
+    print(st.secrets)
     if key in st.secrets:
         return st.secrets[key]
     # return os.getenv(key)
