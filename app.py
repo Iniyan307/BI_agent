@@ -82,6 +82,6 @@ if user_input:
         error_text = str(e).lower()
         # Detect Gemini quota / API error
         if "quota" in error_text or "rate" in error_text or "api" in error_text:
-            st.error("🚨 Google Gemini API key quota exhausted. Please try again later or switch to local LLM.")
+            st.error("🚨 Google Gemini API key quota exhausted. Please try again later or tomorrow.")
         else:
             st.error("⚠️ Something went wrong. Please try again.")
