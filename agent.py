@@ -294,9 +294,7 @@ BI_tool_node = ToolNode(bi_tools)
 WORK_ORDER_TRACKER = ['Name', 'Customer Name Code', 'Serial #', 'Nature of Work', 'Last executed month of recurring project', 'Execution Status', 'Data Delivery Date', 'Date of PO/LOI', 'Document Type', 'Probable Start Date', 'Probable End Date', 'BD/KAM Personnel code', 'Sector', 'Type of Work', 'Is any Skylark software platform part of the client deliverables in this deal?', 'Last invoice date', 'latest invoice no.', 'Amount in Rupees (Excl of GST) (Masked)', 'Amount in Rupees (Incl of GST) (Masked)', 'Billed Value in Rupees (Excl of GST.) (Masked)', 'Billed Value in Rupees (Incl of GST.) (Masked)', 'Collected Amount in Rupees (Incl of GST.) (Masked)', 'Amount to be billed in Rs. (Exl. of GST) (Masked)', 'Amount to be billed in Rs. (Incl. of GST) (Masked)', 'Amount Receivable (Masked)', 'AR Priority account', 'Quantity by Ops', 'Quantities as per PO', 'Quantity billed (till date)', 'Balance in quantity', 'Invoice Status', 'Expected Billing Month', 'Actual Billing Month', 'Actual Collection Month', 'WO Status (billed)', 'Collection status', 'Collection Date', 'Billing Status']
 DEAL_FUNNEL_DATA = ['Name', 'Owner code', 'Client Code', 'Deal Status', 'Close Date (A)', 'Closure Probability', 'Masked Deal value', 'Tentative Close Date', 'Deal Stage', 'Product deal', 'Sector/service', 'Created Date']
 
-# ----------------------------
-# 1️⃣ Intent Extraction
-# ----------------------------
+
 def intent_node(state: BIState):
 
     messages = state["messages"]
