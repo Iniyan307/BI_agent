@@ -2,6 +2,10 @@ import streamlit as st
 from langchain_core.messages import HumanMessage, AIMessage, ToolMessage
 from agent import graph
 
+st.caption(
+    "⚠️ Powered by a free-tier Gemini API key. Limited usage — may become unavailable once quota is exhausted."
+)
+
 st.set_page_config(page_title="BI Agent", layout="wide")
 st.title("📊 BI Conversational Agent")
 
