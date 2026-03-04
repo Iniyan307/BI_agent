@@ -51,7 +51,7 @@ def fetch_monday_data(columns: list, board_name: str):
     query = f"""
     query {{
       boards(ids: {board_id}) {{
-        items_page(limit: 500) {{
+        items_page(limit: 20) {{
           items {{
             name
             column_values(ids: ["{column_ids_str}"]) {{
